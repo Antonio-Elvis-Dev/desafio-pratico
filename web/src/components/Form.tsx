@@ -57,7 +57,7 @@ export function FormScreem() {
     try {
       await api.post("/product", data); // Envia os dados para a API
       alert("Produto cadastrado com sucesso!");
-      navigate("/products")
+      navigate("/listProduct")
     } catch (error) {
       console.error("Erro ao enviar os dados:", error);
       alert("Ocorreu um erro ao cadastrar o produto.");
@@ -66,7 +66,7 @@ export function FormScreem() {
 
   return (
     <Form {...form}>
-      <form className="mb-4" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="mb-4 max-w-xl" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="name"
@@ -113,7 +113,7 @@ export function FormScreem() {
             </FormItem>
           )}
         />
-        <Button type="submit">Enviar</Button>
+        <Button className="mt-4" type="submit">Enviar</Button>
       </form>
     </Form>
   );

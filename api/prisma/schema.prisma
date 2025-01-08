@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 model Product{
@@ -15,4 +15,6 @@ model Product{
   name String 
   price Float
   avaliable Boolean @default(true)
+
+  createdAt DateTime @default(now())
 }
