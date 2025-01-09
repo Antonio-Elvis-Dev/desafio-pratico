@@ -35,6 +35,7 @@ import {
 } from "@/components/ui/table"
 import { api } from "@/services/api"
 import { TableProduct } from "./TableProduct"
+import { ModalNewProduct } from "./ModalNewProduct"
 
 
 
@@ -61,7 +62,7 @@ export const List = () => {
       setData(response.data)
 
     }
-
+   
     handleGetProducts()
 
   }, [data])
@@ -69,6 +70,7 @@ export const List = () => {
   return (
     <>
    <TableProduct data={data} />
+
     </>
   )
 

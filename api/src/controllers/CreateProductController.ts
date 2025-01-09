@@ -3,13 +3,14 @@ import { Request, Response } from "express";
 
 class CreateProductController {
   async handle(req: Request, res: Response) {
-    const { name, price, avaliable } = req.body;
+    const { name, price,description, avaliable } = req.body;
 
     const createProductService = new CreateProductService();
 
     try {
       const product = await createProductService.execute({
         name,
+        description,
         price,
         avaliable,
       });

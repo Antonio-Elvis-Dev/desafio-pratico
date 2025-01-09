@@ -1,4 +1,3 @@
-import React from "react";
 import { AppSidebar } from "./components/app-sidebar";
 import { ThemeProvider } from "./components/theme-provider";
 import { SidebarProvider } from "./components/ui/sidebar";
@@ -6,35 +5,37 @@ import { SidebarProvider } from "./components/ui/sidebar";
 import { List } from "./components/List.tsx";
 import { FormScreem } from "./components/Form.tsx";
 
-import { Routes, Route } from "react-router";
 import { Header } from "./components/Header.tsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-export function App({ children }: { children: React.ReactNode }) {
+export function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <SidebarProvider className="">
-        <div className="flex w-full h-screen">
+      <BrowserRouter>
+        <SidebarProvider className="">
+          <div className="flex w-full h-screen">
 
-        <AppSidebar />
+            <AppSidebar />
 
-        <div className="flex flex-col flex-1 ">
+            <div className="flex flex-col flex-1 ">
 
-        <Header />
-       
-        <main className="flex-1  overflow-auto p-4 ">
-          
-          {children}
+              <Header />
 
-          <Routes>
-            <Route index path="/listProduct" element={<List />} />
-            <Route path="/formProduct" element={<FormScreem />} />
-          </Routes>
+              <main className="flex-1  overflow-auto p-4 ">
 
-        </main>
-        </div>
 
-        </div>
-      </SidebarProvider>
+                <Routes>
+                  <Route path="/listProduct" element={<List />} />
+                  <Route path="/" element={<FormScreem />} />
+                </Routes>
+
+              </main>
+            </div>
+
+          </div>
+        </SidebarProvider>
+
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

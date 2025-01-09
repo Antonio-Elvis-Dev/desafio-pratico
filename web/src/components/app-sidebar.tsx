@@ -11,13 +11,13 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Home, Box } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 
 export function AppSidebar() {
   const items = [
     {
-      title: "Home",
-      url: "/formProduct",
+      title: "Cadastrar",
+      url: "/",
       icon: Home,
     },
     {
@@ -27,12 +27,15 @@ export function AppSidebar() {
     },
   ];
 
+ const navigate = useNavigate()
+
+
   return (
     <Sidebar className="w-64 flex-shrink-0 bg-gray-900">
       <SidebarHeader />
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-xl ">
+        <SidebarGroup className="">
+          <SidebarGroupLabel className="text-xl font-bold mb-4 cursor-pointer "   >
             Cadastre Aqui
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -41,8 +44,8 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     
-                      <Link to={item.url}>
-                        <item.icon />
+                      <Link to={item.url} onClick={()=>console.log(`Navegação para ${item.url}`)}>
+                        <item.icon className="mr-2" />
                         <span>{item.title}</span>
                       </Link>
                     

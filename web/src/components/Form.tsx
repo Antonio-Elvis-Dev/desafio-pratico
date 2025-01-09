@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm,  } from "react-hook-form";
 import {
   Form,
   FormControl,
@@ -17,13 +17,15 @@ import { Button } from "./ui/button";
 import { z } from "zod";
 import { Switch } from "./ui/switch";
 
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+
 
 import { api } from "@/services/api";
 
 const formSchema = z.object({
   name: z.string().min(3, "O nome é obrigatório."),
   price: z.number(),
+  description:z.string().min(3,"Insira uma descrição"),
   avaliable: z.boolean(),
 });
 
@@ -47,16 +49,18 @@ export function FormScreem() {
     defaultValues: {
       name: "",
       price: 0,
+      description:"",
       avaliable: true,
     },
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log(data);
-
     try {
       await api.post("/product", data); // Envia os dados para a API
       alert("Produto cadastrado com sucesso!");
+
+      form.reset()
+
       navigate("/listProduct")
     } catch (error) {
       console.error("Erro ao enviar os dados:", error);
@@ -66,7 +70,7 @@ export function FormScreem() {
 
   return (
     <Form {...form}>
-      <form className="mb-4 max-w-xl" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="mb-4 max-w-xl " onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="name"
@@ -80,6 +84,21 @@ export function FormScreem() {
             </FormItem>
           )}
         />
+
+<FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Descrição</FormLabel>
+              <FormControl>
+                <Input placeholder="ex.: Feijão tipo 1, rico em ferro..." {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="price"
@@ -113,7 +132,7 @@ export function FormScreem() {
             </FormItem>
           )}
         />
-        <Button className="mt-4" type="submit">Enviar</Button>
+        <Button className="mt-4 bg-green-600 hover:bg-green-400" type="submit">Enviar</Button>
       </form>
     </Form>
   );

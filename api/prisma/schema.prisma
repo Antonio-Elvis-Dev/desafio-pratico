@@ -13,6 +13,7 @@ datasource db {
 model Product{
   id String @id @default(uuid())
   name String 
+  description String
   price Float
   avaliable Boolean @default(true)
 
